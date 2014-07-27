@@ -44,7 +44,7 @@ At time of writing I have made over 132 changes, and many are the result of feat
 
 This is by no means an official solution - it is something I created to solve a problem I had, and has now grown in to a full component. Twitter may change its system in such a way to cause this to stop working. I of course will try my best to adapt to any changes and all future versions of this code shall be posted here, on this site. I suggest you check back regularly for any updates. This is however the only solution I know of to date to get public data from Twitter without using the new 1.1 API which otherwise requires OAUTH tokens with every request and is a lot harder to set up. Lets keep it simple!
 
-Feel free to use in your own projects. I only ask you keep the JavaScript disclaimer with my code (even if code is modified) so others can find the original source should they wish to get updates or support. 
+Feel free to use in your own projects. I only ask you keep any disclaimers with my code (even if code is modified / minified) so others can find the original source should they wish to get updates or support. 
 A link back / social media shout out is always appreciated to help others discover it but not required :-)
 
 With that out of the way, I hope you enjoy this component, and that it makes your life a bit easier. Jason Mayes
