@@ -1,12 +1,13 @@
-/******************************************************************************
-*  #### Twitter Post Fetcher v10.0 ####
+/*********************************************************************
+*  #### Twitter Post Fetcher v11.0 ####
 *  Coded by Jason Mayes 2013. A present to all the developers out there.
 *  www.jasonmayes.com
-*  Please keep this disclaimer with my code if you use / modify it. Thanks. :-)
-*  Got feedback or questions, ask here:
+*  Please keep this disclaimer with my code if you use it. Thanks. :-)
+*  Got feedback or questions, ask here: 
 *  http://www.jasonmayes.com/projects/twitterApi/
+*  Github: https://github.com/jasonmayes/Twitter-Post-Fetcher
 *  Updates will be posted to this site.
-******************************************************************************/
+*********************************************************************/
 var twitterFetcher = function() {
   var domNode = '';
   var maxTweets = 20;
@@ -57,61 +58,58 @@ var twitterFetcher = function() {
   };
 
   return {
-    fetch: function(id, domId, maxNumberOfTweets, enableLinks, showUser,
-        showTime, dateFunction, showRetweet, customCallback, showInteraction) {
-      if (maxNumberOfTweets === undefined) {
-        maxNumberOfTweets = 20;
+    fetch: function(config) {
+      if (config.maxTweets === undefined) {
+        config.maxTweets = 20;
       }
-      if (enableLinks === undefined) {
-        parseLinks = true;
+      if (config.enableLinks === undefined) {
+        config.enableLinks = true;
       }
-      if (showUser === undefined) {
-        showUser = true;
+      if (config.showUser === undefined) {
+        config.showUser = true;
       }
-      if (showTime === undefined) {
-        showTime = true;
+      if (config.showTime === undefined) {
+        config.showTime = true;
       }
-      if (dateFunction === undefined) {
-        dateFunction = 'default';
+      if (config.dateFunction === undefined) {
+        config.dateFunction = 'default';
       }
-      if (showRetweet === undefined) {
-        showRetweet = true;
+      if (config.showRetweet === undefined) {
+        config.showRetweet = true;
       }
-      if (customCallback === undefined) {
-        customCallback = null;
+      if (config.customCallback === undefined) {
+        config.customCallback = null;
       }
-      if (showInteraction === undefined) {
-        showInteraction = true;
+      if (config.showInteraction === undefined) {
+        config.showInteraction = true;
       }
+
       if (inProgress) {
-        queue.push({"id":id, "domId":domId, "maxTweets":maxNumberOfTweets,
-            "enableLinks":enableLinks, "showUser":showUser,
-            "showTime":showTime, "dateFunction":dateFunction,
-            "showRt":showRetweet, "customCallback":customCallback,
-            "showInteraction": showInteraction});
+        queue.push(config);
       } else {
         inProgress = true;
-        domNode = domId;
 
-        maxTweets = maxNumberOfTweets;
-        parseLinks = enableLinks;
-        printUser = showUser;
-        printTime = showTime;
-        showRts = showRetweet;
-        formatterFunction = dateFunction;
-        customCallbackFunction = customCallback;
-        showInteractionLinks = showInteraction;
+        domNode = config.domId;
+        maxTweets = config.maxTweets;
+        parseLinks = config.enableLinks;
+        printUser = config.showUser;
+        printTime = config.showTime;
+        showRts = config.showRetweet;
+        formatterFunction = config.dateFunction;
+        customCallbackFunction = config.customCallback;
+        showInteractionLinks = config.showInteraction;
+
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = '//cdn.syndication.twimg.com/widgets/timelines/' +
-            id + '?&lang=en&callback=twitterFetcher.callback&' +
+            config.id + '?&lang=en&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
         document.getElementsByTagName('head')[0].appendChild(script);
       }
     },
 
     callback: function(data) {
-      var div = document.createElement("div");
+      var div = document.createElement('div');
       div.innerHTML = data.body;
       if (typeof(div.getElementsByClassName) === 'undefined') {
          supportsClassName = false;
@@ -232,11 +230,9 @@ var twitterFetcher = function() {
       }
       handleTweets(arrayTweets);
       inProgress = false;
+
       if (queue.length > 0) {
-        twitterFetcher.fetch(queue[0].id, queue[0].domId, queue[0].maxTweets,
-            queue[0].enableLinks, queue[0].showUser, queue[0].showTime,
-            queue[0].dateFunction, queue[0].showRt, queue[0].customCallback,
-            queue[0].showInteraction);
+        twitterFetcher.fetch(queue[0]);
         queue.splice(0,1);
       }
     }

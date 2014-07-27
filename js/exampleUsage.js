@@ -41,14 +41,28 @@
 // A simple example to get my latest tweet and write to a HTML element with
 // id "tweets". Also automatically hyperlinks URLS and user mentions and
 // hashtags.
-twitterFetcher.fetch('345170787868762112', 'example1', 1, true);
+var config1 = {
+  "id": '345170787868762112',
+  "domId": 'example1',
+  "maxTweets": 1,
+  "enableLinks": true
+};
+twitterFetcher.fetch(config1);
 
 
 // ##### Simple example 2 #####
 // A simple example to get my latest 5 of my favourite tweets and write to a
 // HTML element with id "talk". Also automatically hyperlinks URLS and user
 // mentions and hashtags but does not display time of post.
-twitterFetcher.fetch('347099293930377217', 'example2', 5, true, true, false);
+var config2 = {
+  "id": '347099293930377217',
+  "domId": 'example2',
+  "maxTweets": 5,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true
+};
+twitterFetcher.fetch(config2);
 
 
 // ##### Advanced example #####
@@ -56,8 +70,17 @@ twitterFetcher.fetch('347099293930377217', 'example2', 5, true, true, false);
 // HTML element with id "tweets2" without showing user details and using a
 // custom format to display the date/time of the post, and does not show
 // retweets.
-twitterFetcher.fetch('345690956013633536', 'example3', 3, true, false, true,
-    dateFormatter, false);
+
+var config3 = {
+  "id": '345690956013633536',
+  "domId": 'example3',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": false,
+  "showTime": true,
+  "dateFunction": dateFormatter,
+  "showRetweet": false
+};
 
 // For advanced example which allows you to customize how tweet time is
 // formatted you simply define a function which takes a JavaScript date as a
@@ -68,13 +91,26 @@ function dateFormatter(date) {
   return date.toTimeString();
 }
 
+twitterFetcher.fetch(config3);
+
 
 // ##### Advanced example 2 #####
 // Similar as previous, except this time we pass a custom function to render the
 // tweets ourself! Useful if you need to know exactly when data has returned or
 // if you need full control over the output.
-twitterFetcher.fetch('345690956013633536', '', 3, true, true, true, '', false,
-    handleTweets, false);
+
+var config4 = {
+  "id": '345690956013633536',
+  "domId": '',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "dateFunction": '',
+  "showRetweet": false,
+  "customCallback": handleTweets,
+  "showInteraction": false
+};
 
 function handleTweets(tweets){
     var x = tweets.length;
@@ -88,3 +124,5 @@ function handleTweets(tweets){
     html += '</ul>';
     element.innerHTML = html;
 }
+
+twitterFetcher.fetch(config4);
