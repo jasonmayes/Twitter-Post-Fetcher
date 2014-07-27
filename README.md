@@ -20,10 +20,10 @@ All popular browsers supported. Chrome, Firefox, Safari, Opera, Internet Explore
 
 Please read comments in JavaScript for examples on how to use and how to generate a widget id to use with the component - it is really easy! Here are some examples on CodePen:
 
-Regular usage: http://codepen.io/jasonmayes/pen/Ioype
-3D Twitter Cube: http://codepen.io/jasonmayes/pen/rDyqj
+* Regular usage: http://codepen.io/jasonmayes/pen/Ioype
+* 3D Twitter Cube: http://codepen.io/jasonmayes/pen/rDyqj
 
-## Key changes
+## Key changes / features
 
 * UPDATE 1: First version released!
 * UPDATE 2: Due to popular demand, you can now specify how many tweets you want returned which can be any number between 1 and 20, as the third parameter to the function call :-) Let me know if you have any other requests below.
@@ -43,6 +43,9 @@ At time of writing I have made over 132 changes, and many are the result of feat
 ## Disclaimer
 
 This is by no means an official solution - it is something I created to solve a problem I had, and has now grown in to a full component. Twitter may change its system in such a way to cause this to stop working. I of course will try my best to adapt to any changes and all future versions of this code shall be posted here, on this site. I suggest you check back regularly for any updates. This is however the only solution I know of to date to get public data from Twitter without using the new 1.1 API which otherwise requires OAUTH tokens with every request and is a lot harder to set up. Lets keep it simple!
+
+Feel free to use in your own projects. I only ask you keep the JavaScript disclaimer with my code (even if code is modified) so others can find the original source should they wish to get updates or support. 
+A link back / social media shout out is always appreciated to help others discover it but not required :-)
 
 With that out of the way, I hope you enjoy this component, and that it makes your life a bit easier. Jason Mayes
 
