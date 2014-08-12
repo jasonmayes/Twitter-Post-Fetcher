@@ -24,7 +24,7 @@ var twitterFetcher = function() {
   var lang = 'en';
 
   function handleTweets(tweets){
-    if (customCallbackFunction == null) {
+    if (customCallbackFunction === null) {
       var x = tweets.length;
       var n = 0;
       var element = document.getElementById(domNode);
@@ -56,7 +56,7 @@ var twitterFetcher = function() {
         }
     }
     return a;
-  };
+  }
 
   return {
     fetch: function(config) {
@@ -103,7 +103,7 @@ var twitterFetcher = function() {
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = '//cdn.syndication.twimg.com/widgets/timelines/' +
-            config.id + '?&lang=' + config.lang + '&callback=twitterFetcher.callback&' +
+            config.id + '?&lang=' + (config.lang || lang) + '&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
         document.getElementsByTagName('head')[0].appendChild(script);
       }
