@@ -3,7 +3,7 @@
 *  Coded by Jason Mayes 2013. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
-*  Got feedback or questions, ask here: 
+*  Got feedback or questions, ask here:
 *  http://www.jasonmayes.com/projects/twitterApi/
 *  Github: https://github.com/jasonmayes/Twitter-Post-Fetcher
 *  Updates will be posted to this site.
@@ -21,6 +21,7 @@ var twitterFetcher = function() {
   var showRts = true;
   var customCallbackFunction = null;
   var showInteractionLinks = true;
+  var lang = 'en';
 
   function handleTweets(tweets){
     if (customCallbackFunction == null) {
@@ -102,7 +103,7 @@ var twitterFetcher = function() {
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = '//cdn.syndication.twimg.com/widgets/timelines/' +
-            config.id + '?&lang=en&callback=twitterFetcher.callback&' +
+            config.id + '?&lang=' + config.lang + '&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
         document.getElementsByTagName('head')[0].appendChild(script);
       }
