@@ -57,14 +57,17 @@ twitterFetcher.fetch(config1);
 // ##### Simple example 2 #####
 // A simple example to get my latest 5 of my favourite tweets and write to a
 // HTML element with id "talk". Also automatically hyperlinks URLS and user
-// mentions and hashtags but does not display time of post.
+// mentions and hashtags but does not display time of post. We also make the
+// request to Twitter specifiying we would like results where possible in
+// English language (eg for Twitter phrases like "posted on" or "time ago").
 var config2 = {
   "id": '347099293930377217',
   "domId": 'example2',
   "maxTweets": 5,
-  "enableLinks": true,
+  "enableLinks": true, 
   "showUser": true,
-  "showTime": true
+  "showTime": true,
+  "lang": 'en'
 };
 twitterFetcher.fetch(config2);
 
@@ -73,9 +76,7 @@ twitterFetcher.fetch(config2);
 // An advance example to get latest 5 posts using hashtag #API and write to a
 // HTML element with id "tweets2" without showing user details and using a
 // custom format to display the date/time of the post, and does not show
-// retweets. We also make the request to Twitter specifiying we would like
-// results where possible in English language.
-
+// retweets.
 var config3 = {
   "id": '345690956013633536',
   "domId": 'example3',
@@ -84,8 +85,7 @@ var config3 = {
   "showUser": false,
   "showTime": true,
   "dateFunction": dateFormatter,
-  "showRetweet": false,
-  "lang": 'en'
+  "showRetweet": false
 };
 
 // For advanced example which allows you to customize how tweet time is
