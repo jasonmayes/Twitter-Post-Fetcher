@@ -73,7 +73,8 @@ twitterFetcher.fetch(config2);
 // An advance example to get latest 5 posts using hashtag #API and write to a
 // HTML element with id "tweets2" without showing user details and using a
 // custom format to display the date/time of the post, and does not show
-// retweets.
+// retweets. We also make the request to Twitter specifiying we would like
+// results where possible in English language.
 
 var config3 = {
   "id": '345690956013633536',
@@ -83,7 +84,8 @@ var config3 = {
   "showUser": false,
   "showTime": true,
   "dateFunction": dateFormatter,
-  "showRetweet": false
+  "showRetweet": false,
+  "lang": 'en'
 };
 
 // For advanced example which allows you to customize how tweet time is
