@@ -132,3 +132,19 @@ function handleTweets(tweets){
 }
 
 twitterFetcher.fetch(config4);
+
+// ##### Advanced example #####
+// An advance example to get latest 5 posts using hashtag #API and write to a
+// HTML element with id "example5",showing user details and images (if any).
+var config5 = {
+  "id": '345690956013633536',
+  "domId": 'example5',
+  "maxTweets": 15,
+  "enableLinks": true,
+  "showUser": true,
+  "showTime": true,
+  "showRetweet": true,
+  "showImages": true
+};
+
+twitterFetcher.fetch(config5);

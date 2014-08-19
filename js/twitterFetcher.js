@@ -21,6 +21,7 @@ var twitterFetcher = function() {
   var showRts = true;
   var customCallbackFunction = null;
   var showInteractionLinks = true;
+  var showImages = false;
   var lang = 'en';
 
   function handleTweets(tweets){
@@ -58,6 +59,13 @@ var twitterFetcher = function() {
     return a;
   }
 
+  function extractImageUrl(image_data) {
+    if (image_data !== undefined) {
+      var data_src = image_data.innerHTML.match(/data-srcset="([A-z0-9%_\.-]+)/i)[0];
+      return decodeURIComponent(data_src).split('"')[1];
+    }
+  }
+
   return {
     fetch: function(config) {
       if (config.maxTweets === undefined) {
@@ -84,6 +92,9 @@ var twitterFetcher = function() {
       if (config.showInteraction === undefined) {
         config.showInteraction = true;
       }
+      if (config.showImages === undefined) {
+        config.showImages = false;
+      }
 
       if (inProgress) {
         queue.push(config);
@@ -99,6 +110,7 @@ var twitterFetcher = function() {
         formatterFunction = config.dateFunction;
         customCallbackFunction = config.customCallback;
         showInteractionLinks = config.showInteraction;
+        showImages = config.showImages;
 
         var script = document.createElement('script');
         script.type = 'text/javascript';
@@ -119,6 +131,7 @@ var twitterFetcher = function() {
       var tweets = [];
       var authors = [];
       var times = [];
+      var images = [];
       var rts = [];
       var tids = [];
       var x = 0;
@@ -136,6 +149,11 @@ var twitterFetcher = function() {
             tids.push(tmp[x].getAttribute('data-tweet-id'));
             authors.push(tmp[x].getElementsByClassName('p-author')[0]);
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
+            if (tmp[x].getElementsByClassName('inline-media')[0] !== undefined) {
+              images.push(tmp[x].getElementsByClassName('inline-media')[0]);
+            } else {
+              images.push(undefined);
+            }
           }
           x++;
         }
@@ -146,6 +164,13 @@ var twitterFetcher = function() {
           tids.push(tmp[x].getAttribute('data-tweet-id'));
           authors.push(getElementsByClassName(tmp[x], 'p-author')[0]);
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
+          images.push(tmp[x].getElementsByClassName('inline-media')[0]);
+          if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
+            images.push(getElementsByClassName(tmp[x], 'inline-media')[0]);
+          } else {
+            images.push(undefined);
+          }
+
           if (getElementsByClassName(tmp[x], 'retweet-credit').length > 0) {
             rts.push(true);
           } else {
@@ -160,6 +185,7 @@ var twitterFetcher = function() {
         authors.splice(maxTweets, (authors.length - maxTweets));
         times.splice(maxTweets, (times.length - maxTweets));
         rts.splice(maxTweets, (rts.length - maxTweets));
+        images.splice(maxTweets, (images.length - maxTweets));
       }
 
       var arrayTweets = [];
@@ -226,6 +252,13 @@ var twitterFetcher = function() {
               '<a href="https://twitter.com/intent/favorite?tweet_id=' +
               tids[n] + '" class="twitter_fav_icon">Favorite</a></p>';
         }
+
+        if (showImages && images[n] !== undefined) {
+          op += '<div class="media">' +
+              '<img src="' + extractImageUrl(images[n]) + '" alt="Image from tweet" />' +
+              '</div>';
+        }
+
         arrayTweets.push(op);
         n++;
       }
