@@ -86,6 +86,11 @@ ul li:hover {
   margin-left:10px;
 }
 
+.media img {
+  max-width:250px;
+  max-height:250px;
+}
+
 #linkage {
   position:fixed;
   top:0px;

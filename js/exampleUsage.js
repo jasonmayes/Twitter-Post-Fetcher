@@ -43,7 +43,7 @@
 
 // ##### Simple example 1 #####
 // A simple example to get my latest tweet and write to a HTML element with
-// id "tweets". Also automatically hyperlinks URLS and user mentions and
+// id "example1". Also automatically hyperlinks URLS and user mentions and
 // hashtags.
 var config1 = {
   "id": '345170787868762112',
@@ -72,14 +72,27 @@ var config2 = {
 twitterFetcher.fetch(config2);
 
 
+// ##### Simple example 3 #####
+// A simple example to get latest 5 tweets for #API tag and shows any images
+// attached to tweets.
+var config3 = {
+  "id": '502160051226681344',
+  "domId": 'example3',
+  "maxTweets": 5,
+  "enableLinks": true,
+  "showImages": true
+};
+twitterFetcher.fetch(config3);
+
+
 // ##### Advanced example #####
 // An advance example to get latest 5 posts using hashtag #API and write to a
 // HTML element with id "tweets2" without showing user details and using a
 // custom format to display the date/time of the post, and does not show
 // retweets.
-var config3 = {
+var config4 = {
   "id": '345690956013633536',
-  "domId": 'example3',
+  "domId": 'example4',
   "maxTweets": 3,
   "enableLinks": true,
   "showUser": false,
@@ -97,7 +110,7 @@ function dateFormatter(date) {
   return date.toTimeString();
 }
 
-twitterFetcher.fetch(config3);
+twitterFetcher.fetch(config4);
 
 
 // ##### Advanced example 2 #####
@@ -105,7 +118,7 @@ twitterFetcher.fetch(config3);
 // tweets ourself! Useful if you need to know exactly when data has returned or
 // if you need full control over the output.
 
-var config4 = {
+var config5 = {
   "id": '345690956013633536',
   "domId": '',
   "maxTweets": 3,
@@ -121,7 +134,7 @@ var config4 = {
 function handleTweets(tweets){
     var x = tweets.length;
     var n = 0;
-    var element = document.getElementById('example4');
+    var element = document.getElementById('example5');
     var html = '<ul>';
     while(n < x) {
       html += '<li>' + tweets[n] + '</li>';
@@ -130,21 +143,5 @@ function handleTweets(tweets){
     html += '</ul>';
     element.innerHTML = html;
 }
-
-twitterFetcher.fetch(config4);
-
-// ##### Advanced example #####
-// An advance example to get latest 5 posts using hashtag #API and write to a
-// HTML element with id "example5",showing user details and images (if any).
-var config5 = {
-  "id": '345690956013633536',
-  "domId": 'example5',
-  "maxTweets": 15,
-  "enableLinks": true,
-  "showUser": true,
-  "showTime": true,
-  "showRetweet": true,
-  "showImages": true
-};
 
 twitterFetcher.fetch(config5);
