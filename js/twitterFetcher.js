@@ -164,7 +164,6 @@ var twitterFetcher = function() {
           tids.push(tmp[x].getAttribute('data-tweet-id'));
           authors.push(getElementsByClassName(tmp[x], 'p-author')[0]);
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
-          images.push(tmp[x].getElementsByClassName('inline-media')[0]);
           if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
             images.push(getElementsByClassName(tmp[x], 'inline-media')[0]);
           } else {
