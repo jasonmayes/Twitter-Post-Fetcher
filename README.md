@@ -35,6 +35,7 @@ Please read comments in JavaScript for examples on how to use and how to generat
 * UPDATE 8: You can now not show retweets via a new parameter in function call. See comments in code.
 * UPDATE 9: Now supports a custom function callback when data is ready allowing you to have full control over its output.
 * UPDATE 10: Now supports Replying / Retweeting / Favouriting.
+* UPDATE 11: Now includes option to render a tweet's image.
 
 ## Got suggestions? Feedback? Feature requests? Tell me!
 
