@@ -32,19 +32,19 @@
  *
  * @param object.maxTweets [int] The maximum number of tweets you want
  *     to return. Must be a number between 1 and 20. Default value is 20.
- * @param object.enableLinks {boolean} Set false if you don't want
+ * @param object.enableLinks [boolean] Set false if you don't want
  *     urls and hashtags to be hyperlinked.
  * @param object.showUser [boolean] Set false if you don't want user
  *     photo / name for tweet to show.
  * @param object.showTime [boolean] Set false if you don't want time of tweet
  *     to show.
- * @param object.dateFunction [function/string] A function you can specify
+ * @param object.dateFunction [function] A function you can specify
  *     to format date/time of tweet however you like. This function takes
  *     a JavaScript date as a parameter and returns a String representation
  *     of that date.
  * @param object.showRetweet [boolean] Set false if you don't want retweets
  *     to show.
- * @param object.customCallback [function/string] A function you can specify
+ * @param object.customCallback [function] A function you can specify
  *     to call when data are ready. It also passes data to this function
  *     to manipulate them yourself before outputting. If you specify
  *     this parameter you must output data yourself!
