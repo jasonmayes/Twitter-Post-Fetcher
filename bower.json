@@ -1,0 +1,24 @@
+{
+  "name": "twitter-fetcher",
+  "description": "Fetch your Twitter pots without using OAUTH or the new 1.1 API. All in JavaScript.",
+  "version": "12.0.0",
+  "author": {
+    "name": "Jason Mayes"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonmayes/Twitter-Post-Fetcher.git"
+  },
+  "main": [
+    "js/twitterFetcher_min.js"
+  ],
+  "keywords": [
+    "Twitter",
+    "fetcher",
+    "Jason Mayes",
+    "Social",
+    "JavaScript",
+    "No OAUTH",
+    "Widget"
+  ]
+}
