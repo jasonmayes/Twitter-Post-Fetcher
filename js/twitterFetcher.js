@@ -269,5 +269,5 @@ var twitterFetcher = function() {
         queue.splice(0,1);
       }
     }
-  }
+  };
 }();
