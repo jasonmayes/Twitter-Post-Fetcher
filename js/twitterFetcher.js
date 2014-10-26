@@ -192,9 +192,10 @@ var twitterFetcher = function() {
       var n = 0;
       while(n < x) {
         if (typeof(formatterFunction) !== 'string') {
+          var datetimeText = times[n].getAttribute('datetime');
           var newDate = new Date(times[n].getAttribute('datetime')
               .replace(/-/g,'/').replace('T', ' ').split('+')[0]);
-          var dateString = formatterFunction(newDate);
+          var dateString = formatterFunction(newDate, datetimeText);
           times[n].setAttribute('aria-label', dateString);
 
           if (tweets[n].innerText) {

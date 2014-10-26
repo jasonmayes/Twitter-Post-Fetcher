@@ -13,15 +13,15 @@
 
 /**
  * How to use TwitterFetcher's fetch function:
- * 
+ *
  * @function fetch(object) Fetches the Twitter content according to
  *     the parameters specified in object.
- * 
+ *
  * @param object {Object} An object containing case sensitive key-value pairs
  *     of properties below.
- * 
+ *
  * You may specify at minimum the following two required properties:
- * 
+ *
  * @param object.id {string} The ID of the Twitter widget you wish
  *     to grab data from (see above for how to generate this number).
  * @param object.domId {string} The ID of the DOM element you want
@@ -80,7 +80,7 @@ var config2 = {
   "id": '347099293930377217',
   "domId": 'example2',
   "maxTweets": 5,
-  "enableLinks": true, 
+  "enableLinks": true,
   "showUser": true,
   "showTime": true,
   "lang": 'en'
@@ -161,3 +161,38 @@ function handleTweets(tweets){
 }
 
 twitterFetcher.fetch(config5);
+
+
+// ##### Advanced example #####
+// An advance example to get latest 3 posts using hashtag #API and write to a
+// HTML element with id "example6" without showing user details and using an
+// alternative custom format with moment.js to display the age of the post,
+// and does not show retweets.
+var config6 = {
+  "id": '345690956013633536',
+  "domId": 'example6',
+  "maxTweets": 3,
+  "enableLinks": true,
+  "showUser": false,
+  "showTime": true,
+  "dateFunction": momentDateFormatter,
+  "showRetweet": false
+};
+
+// For advanced example which allows you to customize how tweet time is
+// formatted you simply define a function which takes a JavaScript date and
+// optional text representation of data as parameters and returns a string!
+// See http://www.w3schools.com/jsref/jsref_obj_date.asp for properties
+// of a Date object.
+//
+// The advantage of using the date string is that internally
+// twitterFetcher discards the timezone in favor of cross-browser
+// support. If you need the timezone, you can use something like
+// Moment.js to parse the original date string and maintain the
+// timezone.
+function momentDateFormatter(date, dateString) {
+  return moment(dateString).fromNow();
+}
+
+twitterFetcher.fetch(config6);
+
