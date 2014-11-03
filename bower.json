@@ -10,7 +10,7 @@
     "url": "https://github.com/jasonmayes/Twitter-Post-Fetcher.git"
   },
   "main": [
-    "js/twitterFetcher_min.js"
+    "js/twitterFetcher.js"
   ],
   "keywords": [
     "Twitter",
