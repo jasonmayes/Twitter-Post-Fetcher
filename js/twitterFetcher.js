@@ -22,6 +22,7 @@ var twitterFetcher = function() {
   var customCallbackFunction = null;
   var showInteractionLinks = true;
   var showImages = false;
+  var targetBlank = true;
   var lang = 'en';
 
   function handleTweets(tweets){
@@ -45,6 +46,13 @@ var twitterFetcher = function() {
     return data.replace(/<b[^>]*>(.*?)<\/b>/gi, function(a,s){return s;})
         .replace(/class=".*?"|data-query-source=".*?"|dir=".*?"|rel=".*?"/gi,
         '');
+  }
+
+  function targetLinksToNewWindow(el) {
+    var links = el.getElementsByTagName('a');
+    for (var i = links.length - 1; i >= 0; i--) {
+      links[i].setAttribute('target', '_blank');
+    }
   }
 
   function getElementsByClassName (node, classname) {
@@ -95,6 +103,9 @@ var twitterFetcher = function() {
       if (config.showImages === undefined) {
         config.showImages = false;
       }
+      if (config.linksInNewWindow === undefined) {
+        config.linksInNewWindow = true;
+      }
 
       if (inProgress) {
         queue.push(config);
@@ -111,6 +122,7 @@ var twitterFetcher = function() {
         customCallbackFunction = config.customCallback;
         showInteractionLinks = config.showInteraction;
         showImages = config.showImages;
+        targetBlank = config.linksInNewWindow;
 
         var script = document.createElement('script');
         script.type = 'text/javascript';
@@ -215,6 +227,12 @@ var twitterFetcher = function() {
         }
         var op = '';
         if (parseLinks) {
+          if (targetBlank) {
+            targetLinksToNewWindow(tweets[n]);
+            if (printUser) {
+              targetLinksToNewWindow(authors[n]);
+            }
+          }
           if (printUser) {
             op += '<div class="user">' + strip(authors[n].innerHTML) +
                 '</div>';
@@ -246,11 +264,11 @@ var twitterFetcher = function() {
         }
         if (showInteractionLinks) {
           op += '<p class="interact"><a href="https://twitter.com/intent/' +
-              'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon">' +
+              'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' + (targetBlank ? ' target="_blank">' : '>') +
               'Reply</a><a href="https://twitter.com/intent/retweet?tweet_id=' +
-              tids[n] + '" class="twitter_retweet_icon">Retweet</a>' +
+              tids[n] + '" class="twitter_retweet_icon"' + (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
               '<a href="https://twitter.com/intent/favorite?tweet_id=' +
-              tids[n] + '" class="twitter_fav_icon">Favorite</a></p>';
+              tids[n] + '" class="twitter_fav_icon"' + (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
         }
 
         if (showImages && images[n] !== undefined) {
