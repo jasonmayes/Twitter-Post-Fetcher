@@ -48,14 +48,11 @@ var twitterFetcher = function() {
         '');
   }
 
-  function targetLinksToNewWindow(data) {
-    var tempEl = document.createElement("div");
-    tempEl.innerHTML = data;
-    var links = tempEl.getElementsByTagName('a');
+  function targetLinksToNewWindow(el) {
+    var links = el.getElementsByTagName('a');
     for (var i = links.length - 1; i >= 0; i--) {
       links[i].setAttribute('target', '_blank');
     };
-    return tempEl.innerHTML;
   }
 
   function getElementsByClassName (node, classname) {
@@ -230,16 +227,12 @@ var twitterFetcher = function() {
         }
         var op = '';
         if (parseLinks) {
-          if (targetBlank) {
-            tweets[n].innerHTML = targetLinksToNewWindow(tweets[n].innerHTML);
-            if (printUser) {
-              authors[n].innerHTML = targetLinksToNewWindow(authors[n].innerHTML);
-            }
-          }          
           if (printUser) {
+            targetBlank && targetLinksToNewWindow(authors[n]);
             op += '<div class="user">' + strip(authors[n].innerHTML) +
-                '</div>';
+                '</div>';            
           }
+          targetBlank && targetLinksToNewWindow(tweets[n]);
           op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
           if (printTime) {
             op += '<p class="timePosted">' +
