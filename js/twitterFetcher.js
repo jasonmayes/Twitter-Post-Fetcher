@@ -52,7 +52,7 @@ var twitterFetcher = function() {
     var links = el.getElementsByTagName('a');
     for (var i = links.length - 1; i >= 0; i--) {
       links[i].setAttribute('target', '_blank');
-    };
+    }
   }
 
   function getElementsByClassName (node, classname) {
@@ -227,12 +227,16 @@ var twitterFetcher = function() {
         }
         var op = '';
         if (parseLinks) {
-          if (printUser) {
-            targetBlank && targetLinksToNewWindow(authors[n]);
-            op += '<div class="user">' + strip(authors[n].innerHTML) +
-                '</div>';            
+          if (targetBlank) {
+            targetLinksToNewWindow(tweets[n]);
+            if (printUser) {
+              targetLinksToNewWindow(authors[n]);
+            }
           }
-          targetBlank && targetLinksToNewWindow(tweets[n]);
+          if (printUser) {
+            op += '<div class="user">' + strip(authors[n].innerHTML) +
+                '</div>';
+          }
           op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
           if (printTime) {
             op += '<p class="timePosted">' +
