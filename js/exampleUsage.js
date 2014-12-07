@@ -52,6 +52,8 @@
  *     for reply, retweet and favourite to show.
  * @param object.showImages [boolean] Set true if you want images from tweet
  *     to show.
+ * @param object.linksInNewWindow [boolean] Set false if you don't want links to open in new window
+ *     to show.
  * @param object.lang [string] The abbreviation of the language you want to use
  *     for Twitter phrases like "posted on" or "time ago". Default value
  *     is "en" (English).
