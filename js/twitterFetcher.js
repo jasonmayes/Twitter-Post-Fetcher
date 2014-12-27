@@ -8,7 +8,7 @@
 *  Github: https://github.com/jasonmayes/Twitter-Post-Fetcher
 *  Updates will be posted to this site.
 *********************************************************************/
-(function (root, factory) {
+(function(root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], factory);
@@ -18,10 +18,10 @@
     // like Node.
     module.exports = factory();
   } else {
-    // Browser globals (root is window)
+    // Browser globals (root is window).
     root.twitterFetcher = factory();
   }
-}(this, function () {
+}(this, function() {
   var domNode = '';
   var maxTweets = 20;
   var parseLinks = true;
@@ -147,7 +147,8 @@
     }
   };
 
-    window.twitterFetcherCallback = function(data) {//must be a global variable because it will be called by JSONP
+    //must be a global variable because it will be called by JSONP
+    window.twitterFetcherCallback = function(data) {
       var div = document.createElement('div');
       div.innerHTML = data.body;
       if (typeof(div.getElementsByClassName) === 'undefined') {
