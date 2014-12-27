@@ -18,8 +18,8 @@
     // like Node.
     module.exports = factory();
   } else {
-    // Browser globals (root is window).
-    root.twitterFetcher = factory();
+    // Browser globals.
+    factory();
   }
 }(this, function() {
   var domNode = '';
@@ -140,15 +140,12 @@
         var script = document.createElement('script');
         script.type = 'text/javascript';
         script.src = '//cdn.syndication.twimg.com/widgets/timelines/' +
-            config.id + '?&lang=' + (config.lang || lang) + '&callback=twitterFetcherCallback&' +
+            config.id + '?&lang=' + (config.lang || lang) + '&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
         document.getElementsByTagName('head')[0].appendChild(script);
       }
-    }
-  };
-
-    //must be a global variable because it will be called by JSONP
-    window.twitterFetcherCallback = function(data) {
+    },
+    callback: function(data) {
       var div = document.createElement('div');
       div.innerHTML = data.body;
       if (typeof(div.getElementsByClassName) === 'undefined') {
@@ -302,7 +299,11 @@
         twitterFetcher.fetch(queue[0]);
         queue.splice(0,1);
       }
-    };
+    }
+  };
+
+  // It must be a global variable because it will be called by JSONP.
+  window.twitterFetcher = twitterFetcher;
 
   return twitterFetcher;
 }));
