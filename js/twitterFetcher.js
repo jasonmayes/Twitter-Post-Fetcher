@@ -1,6 +1,6 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v12.0 ####
-*  Coded by Jason Mayes 2013. A present to all the developers out there.
+*  #### Twitter Post Fetcher v13.0 ####
+*  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
 *  Got feedback or questions, ask here:
@@ -8,7 +8,20 @@
 *  Github: https://github.com/jasonmayes/Twitter-Post-Fetcher
 *  Updates will be posted to this site.
 *********************************************************************/
-var twitterFetcher = function() {
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define([], factory);
+  } else if (typeof exports === 'object') {
+    // Node. Does not work with strict CommonJS, but
+    // only CommonJS-like environments that support module.exports,
+    // like Node.
+    module.exports = factory();
+  } else {
+    // Browser globals.
+    factory();
+  }
+}(this, function() {
   var domNode = '';
   var maxTweets = 20;
   var parseLinks = true;
@@ -74,7 +87,7 @@ var twitterFetcher = function() {
     }
   }
 
-  return {
+  var twitterFetcher = {
     fetch: function(config) {
       if (config.maxTweets === undefined) {
         config.maxTweets = 20;
@@ -132,7 +145,6 @@ var twitterFetcher = function() {
         document.getElementsByTagName('head')[0].appendChild(script);
       }
     },
-
     callback: function(data) {
       var div = document.createElement('div');
       div.innerHTML = data.body;
@@ -289,4 +301,9 @@ var twitterFetcher = function() {
       }
     }
   };
-}();
+
+  // It must be a global variable because it will be called by JSONP.
+  window.twitterFetcher = twitterFetcher;
+
+  return twitterFetcher;
+}));

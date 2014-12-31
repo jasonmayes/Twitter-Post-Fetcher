@@ -36,6 +36,7 @@ Please read comments in JavaScript for examples on how to use and how to generat
 * UPDATE 9: Now supports a custom function callback when data is ready allowing you to have full control over its output.
 * UPDATE 10: Now supports Replying / Retweeting / Favouriting.
 * UPDATE 11: Now includes option to render a tweet's image.
+* UPDATE 13: CommonJS (e.g. Browserify) and AMD (e.g. Require.js) are now supported. See the new examples at the bottom of [exampleUsage.js](js/exampleUsage.js#L200)
 
 ## Got suggestions? Feedback? Feature requests? Tell me!
 
