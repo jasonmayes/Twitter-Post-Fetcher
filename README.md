@@ -51,6 +51,10 @@ A link back / social media shout out is always appreciated to help others discov
 
 With that out of the way, I hope you enjoy this component, and that it makes your life a bit easier. Jason Mayes
 
+## Notes
+
+If you need IE8 support - ensure you do not set a non block level element as the target to render into. Use a DIV or similar instead. See http://msdn.microsoft.com/en-us/library/ie/ms533897(v=vs.85).aspx This is due to browser, not Twitter Fetcher.
+
 ## Buy me a beer
 
 It takes time to maintain the component and respond to all your requests. If this has saved you time, or maybe even a client, then some beer money is always appreciated :-) Hit the link on the right of this page:
