@@ -37,6 +37,7 @@
   var showImages = false;
   var targetBlank = true;
   var lang = 'en';
+  var permalinks = true;
 
   function handleTweets(tweets){
     if (customCallbackFunction === null) {
@@ -119,6 +120,9 @@
       if (config.linksInNewWindow === undefined) {
         config.linksInNewWindow = true;
       }
+      if (config.showPermalinks === undefined) {
+        config.showPermalinks = true;
+      }
 
       if (inProgress) {
         queue.push(config);
@@ -136,6 +140,7 @@
         showInteractionLinks = config.showInteraction;
         showImages = config.showImages;
         targetBlank = config.linksInNewWindow;
+        permalinks = config.showPermalinks;
 
         var script = document.createElement('script');
         script.type = 'text/javascript';
@@ -158,6 +163,7 @@
       var images = [];
       var rts = [];
       var tids = [];
+      var permalinksURL = [];
       var x = 0;
 
       if (supportsClassName) {
@@ -173,6 +179,7 @@
             tids.push(tmp[x].getAttribute('data-tweet-id'));
             authors.push(tmp[x].getElementsByClassName('p-author')[0]);
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
+            permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
             if (tmp[x].getElementsByClassName('inline-media')[0] !== undefined) {
               images.push(tmp[x].getElementsByClassName('inline-media')[0]);
             } else {
@@ -188,6 +195,7 @@
           tids.push(tmp[x].getAttribute('data-tweet-id'));
           authors.push(getElementsByClassName(tmp[x], 'p-author')[0]);
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
+          permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
           if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
             images.push(getElementsByClassName(tmp[x], 'inline-media')[0]);
           } else {
@@ -209,6 +217,7 @@
         times.splice(maxTweets, (times.length - maxTweets));
         rts.splice(maxTweets, (rts.length - maxTweets));
         images.splice(maxTweets, (images.length - maxTweets));
+        permalinksURL.splice(maxTweets, (permalinksURL.length - maxTweets));
       }
 
       var arrayTweets = [];
@@ -251,8 +260,13 @@
           }
           op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
           if (printTime) {
-            op += '<p class="timePosted">' +
-                times[n].getAttribute('aria-label') + '</p>';
+            if (permalinks) {
+              op += '<p class="timePosted"><a href="' + permalinksURL[n] + '">' +
+                  times[n].getAttribute('aria-label') + '</a></p>';
+            } else {
+              op += '<p class="timePosted">' +
+                  times[n].getAttribute('aria-label') + '</p>';
+            }
           }
         } else {
           if (tweets[n].innerText) {
