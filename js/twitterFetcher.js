@@ -261,12 +261,12 @@
           op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
           if (printTime) {
             if (permalinks) {
-                op += '<p class="timePosted"><a href="' + permalinksURL[n] + '">' +
-                    times[n].getAttribute('aria-label') + '</a></p>';
-              } else {
-                op += '<p class="timePosted">' +
-                    times[n].getAttribute('aria-label') + '</p>';
-              }
+              op += '<p class="timePosted"><a href="' + permalinksURL[n] + '">' +
+                  times[n].getAttribute('aria-label') + '</a></p>';
+            } else {
+              op += '<p class="timePosted">' +
+                  times[n].getAttribute('aria-label') + '</p>';
+            }
           }
         } else {
           if (tweets[n].innerText) {

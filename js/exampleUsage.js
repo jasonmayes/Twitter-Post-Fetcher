@@ -57,6 +57,8 @@
  * @param object.lang [string] The abbreviation of the language you want to use
  *     for Twitter phrases like "posted on" or "time ago". Default value
  *     is "en" (English).
+ * @param object.showPermalinks [boolean] Set false if you don't want time
+ *     to be permalinked.
  */
 
 // ##### Simple example 1 #####
@@ -224,4 +226,3 @@ require(['twitter-fetcher'], function (fetcher) {
   };
   fetcher.fetch(config7);
 });
-
