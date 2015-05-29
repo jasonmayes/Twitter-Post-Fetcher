@@ -38,6 +38,7 @@
   var targetBlank = true;
   var lang = 'en';
   var permalinks = true;
+  var script = null;
 
   function handleTweets(tweets){
     if (customCallbackFunction === null) {
@@ -142,12 +143,17 @@
         targetBlank = config.linksInNewWindow;
         permalinks = config.showPermalinks;
 
-        var script = document.createElement('script');
-        script.type = 'text/javascript';
+        if (!script) {
+          script = document.createElement('script');
+          script.type = 'text/javascript';
+        }
         script.src = 'https://cdn.syndication.twimg.com/widgets/timelines/' +
-            config.id + '?&lang=' + (config.lang || lang) + '&callback=twitterFetcher.callback&' +
+            config.id + '?&lang=' + (config.lang || lang) +
+            '&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
-        document.getElementsByTagName('head')[0].appendChild(script);
+        if (!script) {
+          document.getElementsByTagName('head')[0].appendChild(script);
+        }
       }
     },
     callback: function(data) {
@@ -195,7 +201,7 @@
           tids.push(tmp[x].getAttribute('data-tweet-id'));
           authors.push(getElementsByClassName(tmp[x], 'p-author')[0]);
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
-          permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
+          permalinksURL.push(getElementsByClassName(tmp[x], 'permalink')[0]);
           if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
             images.push(getElementsByClassName(tmp[x], 'inline-media')[0]);
           } else {
@@ -261,8 +267,8 @@
           op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
           if (printTime) {
             if (permalinks) {
-              op += '<p class="timePosted"><a href="' + permalinksURL[n] + '">' +
-                  times[n].getAttribute('aria-label') + '</a></p>';
+              op += '<p class="timePosted"><a href="' + permalinksURL[n] +
+                 '">' + times[n].getAttribute('aria-label') + '</a></p>';
             } else {
               op += '<p class="timePosted">' +
                   times[n].getAttribute('aria-label') + '</p>';
@@ -290,17 +296,20 @@
         }
         if (showInteractionLinks) {
           op += '<p class="interact"><a href="https://twitter.com/intent/' +
-              'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' + (targetBlank ? ' target="_blank">' : '>') +
+              'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' +
+              (targetBlank ? ' target="_blank">' : '>') +
               'Reply</a><a href="https://twitter.com/intent/retweet?tweet_id=' +
-              tids[n] + '" class="twitter_retweet_icon"' + (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
+              tids[n] + '" class="twitter_retweet_icon"' +
+              (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
               '<a href="https://twitter.com/intent/favorite?tweet_id=' +
-              tids[n] + '" class="twitter_fav_icon"' + (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
+              tids[n] + '" class="twitter_fav_icon"' +
+              (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
         }
 
         if (showImages && images[n] !== undefined) {
           op += '<div class="media">' +
-              '<img src="' + extractImageUrl(images[n]) + '" alt="Image from tweet" />' +
-              '</div>';
+              '<img src="' + extractImageUrl(images[n]) +
+              '" alt="Image from tweet" />' + '</div>';
         }
 
         arrayTweets.push(op);
