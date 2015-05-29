@@ -39,6 +39,7 @@
   var lang = 'en';
   var permalinks = true;
   var script = null;
+  var scriptAdded = false;
 
   function handleTweets(tweets){
     if (customCallbackFunction === null) {
@@ -143,17 +144,17 @@
         targetBlank = config.linksInNewWindow;
         permalinks = config.showPermalinks;
 
-        if (!script) {
-          script = document.createElement('script');
-          script.type = 'text/javascript';
+        var head = document.getElementsByTagName('head')[0];
+        if (script !== null) {
+          head.removeChild(script);
         }
+        script = document.createElement('script');
+        script.type = 'text/javascript';
         script.src = 'https://cdn.syndication.twimg.com/widgets/timelines/' +
             config.id + '?&lang=' + (config.lang || lang) +
             '&callback=twitterFetcher.callback&' +
             'suppress_response_codes=true&rnd=' + Math.random();
-        if (!script) {
-          document.getElementsByTagName('head')[0].appendChild(script);
-        }
+        head.appendChild(script);
       }
     },
     callback: function(data) {
