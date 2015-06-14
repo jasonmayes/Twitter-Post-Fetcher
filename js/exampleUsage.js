@@ -217,6 +217,7 @@ fetcher.fetch(config7);
 // ##### AMD example (e.g. Require.js) #####
 // The result of this example is identical to example 1, but it's meant for
 // usage with Require.js or similar loader.
+/*
 require(['twitter-fetcher'], function (fetcher) {
   var config7 = {
     "id": '345170787868762112',
@@ -226,3 +227,4 @@ require(['twitter-fetcher'], function (fetcher) {
   };
   fetcher.fetch(config7);
 });
+/*
