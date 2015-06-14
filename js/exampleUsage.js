@@ -204,6 +204,7 @@ twitterFetcher.fetch(config6);
 // ##### CommonJS example (e.g. Browserify) #####
 // The result of this example is identical to example 1, but it's meant for
 // usage through Browserify or compatible bundler.
+/*
 var fetcher = require('twitter-fetcher'); //debowerify may be needed
 var config7 = {
   "id": '345170787868762112',
@@ -212,7 +213,7 @@ var config7 = {
   "enableLinks": true
 };
 fetcher.fetch(config7);
-
+*/
 
 // ##### AMD example (e.g. Require.js) #####
 // The result of this example is identical to example 1, but it's meant for
