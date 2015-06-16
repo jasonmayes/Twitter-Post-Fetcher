@@ -1,6 +1,14 @@
 The MIT License (MIT)
 
-Copyright (c) 2015 Jason Mayes
+Copyright (c) 2015 Jason Mayes  www.jasonmayes.com
+
+Please keep this disclaimer with my code if you use it. Thanks. :-)
+
+Got feedback or questions, ask here:
+http://www.jasonmayes.com/projects/twitterApi/
+
+Github: https://github.com/jasonmayes/Twitter-Post-Fetcher
+Updates will be posted to this site.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
