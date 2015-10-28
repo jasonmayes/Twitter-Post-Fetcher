@@ -59,6 +59,9 @@
  *     is "en" (English).
  * @param object.showPermalinks [boolean] Set false if you don't want time
  *     to be permalinked.
+ * @param object.dataOnly [boolean] Set true if you want the argument passed
+ *     to the customCallback to be an Array of Objects containing data
+ *     instead of an Array of HTML Strings
  */
 
 // ##### Simple example 1 #####
@@ -228,4 +231,31 @@ require(['twitter-fetcher'], function (fetcher) {
   };
   fetcher.fetch(config7);
 });
+*/
+
+
+// ##### Advanced example 3 #####
+// An advance example to get data in Objects, instead of HTML Strings,
+// to populate a template for example.
+// Example with Angular $scope :
+
+var config8 = {
+  "id": '345690956013633536',
+  "dataOnly": true,
+  "customCallback": function(tweets){
+      $scope.data.tweets = tweets;
+    }
+};
+
+// Example of template :
 /*
+<ul>
+  <li ng-repeat="tweet in data.tweets">
+    <h2><a href="{{tweet.permalinkURL}}">{{tweet.time}}</a></h2>
+    <img ng-if="tweet.image" ng-src="{{tweet.image}}" />
+    <p ng-bind-html="tweet.tweet"></p>
+  </li>
+</ul>
+*/
+
+twitterFetcher.fetch(config8);
