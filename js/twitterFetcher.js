@@ -235,8 +235,8 @@
       var arrayTweets = [];
       var x = tweets.length;
       var n = 0;
-      if(dataOnly){
-        while(n < x) {
+      if (dataOnly) {
+        while (n < x) {
           arrayTweets.push({
             tweet: tweets[n].innerHTML,
             author: authors[n].innerHTML,
@@ -248,8 +248,8 @@
           });
           n++;
         }
-      }else{
-        while(n < x) {
+      } else {
+        while (n < x) {
           if (typeof(formatterFunction) !== 'string') {
             var datetimeText = times[n].getAttribute('datetime');
             var newDate = new Date(times[n].getAttribute('datetime')
@@ -284,7 +284,7 @@
               op += '<div class="user">' + strip(authors[n].innerHTML) +
                   '</div>';
             }
-            op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
+            op += '<p class="tweet">' + tweets[n].innerText + '</p>';
             if (printTime) {
               if (permalinks) {
                 op += '<p class="timePosted"><a href="' + permalinksURL[n] +
