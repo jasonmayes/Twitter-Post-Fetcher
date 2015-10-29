@@ -237,25 +237,27 @@ require(['twitter-fetcher'], function (fetcher) {
 // ##### Advanced example 3 #####
 // An advance example to get data in Objects, instead of HTML Strings,
 // to populate a template for example.
-// Example with Angular $scope :
 
 var config8 = {
-  "id": '345690956013633536',
+  "id": '502160051226681344',
   "dataOnly": true,
-  "customCallback": function(tweets){
-      $scope.data.tweets = tweets;
-    }
+  "customCallback": populateTpl
 };
 
-// Example of template :
-/*
-<ul>
-  <li ng-repeat="tweet in data.tweets">
-    <h2><a href="{{tweet.permalinkURL}}">{{tweet.time}}</a></h2>
-    <img ng-if="tweet.image" ng-src="{{tweet.image}}" />
-    <p ng-bind-html="tweet.tweet"></p>
-  </li>
-</ul>
-*/
-
 twitterFetcher.fetch(config8);
+
+function populateTpl(tweets){
+  var element = document.getElementById('example8');
+  var html = '<ul>';
+  for (var i = 0, lgth = tweets.length; i < lgth ; i++) {
+    var tweetObject = tweets[i];
+    html += '<li>'
+      + (tweetObject.image ? '<div class="tweet-img"><img src="'+tweetObject.image+'" /></div>' : '')
+      + '<p class="tweet-content">' + tweetObject.tweet + '</p>'
+      + '<p class="tweet-infos">Posted on the ' + tweetObject.time + ', by ' + tweetObject.author + '</p>'
+      + '<p class="tweet-link"><a href="' + tweetObject.permalinkURL + '">Link</a></p>'
+    + '</li>';
+  }
+  html += '</ul>';
+  element.innerHTML = html;
+}
