@@ -284,7 +284,7 @@
               op += '<div class="user">' + strip(authors[n].innerHTML) +
                   '</div>';
             }
-            op += '<p class="tweet">' + tweets[n].innerText + '</p>';
+            op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
             if (printTime) {
               if (permalinks) {
                 op += '<p class="timePosted"><a href="' + permalinksURL[n] +
