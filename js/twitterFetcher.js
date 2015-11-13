@@ -38,6 +38,7 @@
   var targetBlank = true;
   var lang = 'en';
   var permalinks = true;
+  var dataOnly = false;
   var script = null;
   var scriptAdded = false;
 
@@ -125,6 +126,9 @@
       if (config.showPermalinks === undefined) {
         config.showPermalinks = true;
       }
+      if (config.dataOnly === undefined) {
+        config.dataOnly = false;
+      }
 
       if (inProgress) {
         queue.push(config);
@@ -143,6 +147,7 @@
         showImages = config.showImages;
         targetBlank = config.linksInNewWindow;
         permalinks = config.showPermalinks;
+        dataOnly = config.dataOnly;
 
         var head = document.getElementsByTagName('head')[0];
         if (script !== null) {
@@ -230,91 +235,106 @@
       var arrayTweets = [];
       var x = tweets.length;
       var n = 0;
-      while(n < x) {
-        if (typeof(formatterFunction) !== 'string') {
-          var datetimeText = times[n].getAttribute('datetime');
-          var newDate = new Date(times[n].getAttribute('datetime')
-              .replace(/-/g,'/').replace('T', ' ').split('+')[0]);
-          var dateString = formatterFunction(newDate, datetimeText);
-          times[n].setAttribute('aria-label', dateString);
+      if (dataOnly) {
+        while (n < x) {
+          arrayTweets.push({
+            tweet: tweets[n].innerHTML,
+            author: authors[n].innerHTML,
+            time: times[n].innerText,
+            image: extractImageUrl(images[n]),
+            rt: rts[n],
+            tid: tids[n],
+            permalinkURL: permalinksURL[n].href
+          });
+          n++;
+        }
+      } else {
+        while (n < x) {
+          if (typeof(formatterFunction) !== 'string') {
+            var datetimeText = times[n].getAttribute('datetime');
+            var newDate = new Date(times[n].getAttribute('datetime')
+                .replace(/-/g,'/').replace('T', ' ').split('+')[0]);
+            var dateString = formatterFunction(newDate, datetimeText);
+            times[n].setAttribute('aria-label', dateString);
 
-          if (tweets[n].innerText) {
-            // IE hack.
-            if (supportsClassName) {
-              times[n].innerText = dateString;
+            if (tweets[n].innerText) {
+              // IE hack.
+              if (supportsClassName) {
+                times[n].innerText = dateString;
+              } else {
+                var h = document.createElement('p');
+                var t = document.createTextNode(dateString);
+                h.appendChild(t);
+                h.setAttribute('aria-label', dateString);
+                times[n] = h;
+              }
             } else {
-              var h = document.createElement('p');
-              var t = document.createTextNode(dateString);
-              h.appendChild(t);
-              h.setAttribute('aria-label', dateString);
-              times[n] = h;
+              times[n].textContent = dateString;
+            }
+          }
+          var op = '';
+          if (parseLinks) {
+            if (targetBlank) {
+              targetLinksToNewWindow(tweets[n]);
+              if (printUser) {
+                targetLinksToNewWindow(authors[n]);
+              }
+            }
+            if (printUser) {
+              op += '<div class="user">' + strip(authors[n].innerHTML) +
+                  '</div>';
+            }
+            op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
+            if (printTime) {
+              if (permalinks) {
+                op += '<p class="timePosted"><a href="' + permalinksURL[n] +
+                   '">' + times[n].getAttribute('aria-label') + '</a></p>';
+              } else {
+                op += '<p class="timePosted">' +
+                    times[n].getAttribute('aria-label') + '</p>';
+              }
             }
           } else {
-            times[n].textContent = dateString;
-          }
-        }
-        var op = '';
-        if (parseLinks) {
-          if (targetBlank) {
-            targetLinksToNewWindow(tweets[n]);
-            if (printUser) {
-              targetLinksToNewWindow(authors[n]);
-            }
-          }
-          if (printUser) {
-            op += '<div class="user">' + strip(authors[n].innerHTML) +
-                '</div>';
-          }
-          op += '<p class="tweet">' + strip(tweets[n].innerHTML) + '</p>';
-          if (printTime) {
-            if (permalinks) {
-              op += '<p class="timePosted"><a href="' + permalinksURL[n] +
-                 '">' + times[n].getAttribute('aria-label') + '</a></p>';
+            if (tweets[n].innerText) {
+              if (printUser) {
+                op += '<p class="user">' + authors[n].innerText + '</p>';
+              }
+              op += '<p class="tweet">' +  tweets[n].innerText + '</p>';
+              if (printTime) {
+                op += '<p class="timePosted">' + times[n].innerText + '</p>';
+              }
+
             } else {
-              op += '<p class="timePosted">' +
-                  times[n].getAttribute('aria-label') + '</p>';
+              if (printUser) {
+                op += '<p class="user">' + authors[n].textContent + '</p>';
+              }
+              op += '<p class="tweet">' +  tweets[n].textContent + '</p>';
+              if (printTime) {
+                op += '<p class="timePosted">' + times[n].textContent + '</p>';
+              }
             }
           }
-        } else {
-          if (tweets[n].innerText) {
-            if (printUser) {
-              op += '<p class="user">' + authors[n].innerText + '</p>';
-            }
-            op += '<p class="tweet">' +  tweets[n].innerText + '</p>';
-            if (printTime) {
-              op += '<p class="timePosted">' + times[n].innerText + '</p>';
-            }
-
-          } else {
-            if (printUser) {
-              op += '<p class="user">' + authors[n].textContent + '</p>';
-            }
-            op += '<p class="tweet">' +  tweets[n].textContent + '</p>';
-            if (printTime) {
-              op += '<p class="timePosted">' + times[n].textContent + '</p>';
-            }
+          if (showInteractionLinks) {
+            op += '<p class="interact"><a href="https://twitter.com/intent/' +
+                'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' +
+                (targetBlank ? ' target="_blank">' : '>') +
+                'Reply</a><a href="https://twitter.com/intent/retweet?tweet_id=' +
+                tids[n] + '" class="twitter_retweet_icon"' +
+                (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
+                '<a href="https://twitter.com/intent/favorite?tweet_id=' +
+                tids[n] + '" class="twitter_fav_icon"' +
+                (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
           }
-        }
-        if (showInteractionLinks) {
-          op += '<p class="interact"><a href="https://twitter.com/intent/' +
-              'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' +
-              (targetBlank ? ' target="_blank">' : '>') +
-              'Reply</a><a href="https://twitter.com/intent/retweet?tweet_id=' +
-              tids[n] + '" class="twitter_retweet_icon"' +
-              (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
-              '<a href="https://twitter.com/intent/favorite?tweet_id=' +
-              tids[n] + '" class="twitter_fav_icon"' +
-              (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
-        }
 
-        if (showImages && images[n] !== undefined) {
-          op += '<div class="media">' +
-              '<img src="' + extractImageUrl(images[n]) +
-              '" alt="Image from tweet" />' + '</div>';
-        }
+          if (showImages && images[n] !== undefined) {
+            op += '<div class="media">' +
+                '<img src="' + extractImageUrl(images[n]) +
+                '" alt="Image from tweet" />' + '</div>';
+          }
 
-        arrayTweets.push(op);
-        n++;
+          arrayTweets.push(op);
+          n++;
+        }
       }
       handleTweets(arrayTweets);
       inProgress = false;
