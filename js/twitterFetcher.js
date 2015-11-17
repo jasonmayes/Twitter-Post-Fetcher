@@ -169,6 +169,12 @@
          supportsClassName = false;
       }
 
+      function swapDataSrc(element) {
+        var avatarImg = element.getElementsByTagName('img')[0];
+        avatarImg.src = avatarImg.dataset['src-2x'];
+        return element;
+      };
+
       var tweets = [];
       var authors = [];
       var times = [];
@@ -189,7 +195,7 @@
           if (!rts[x] || rts[x] && showRts) {
             tweets.push(tmp[x].getElementsByClassName('e-entry-title')[0]);
             tids.push(tmp[x].getAttribute('data-tweet-id'));
-            authors.push(tmp[x].getElementsByClassName('p-author')[0]);
+            authors.push(swapDataSrc(tmp[x].getElementsByClassName('p-author')[0]));
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
             permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
             if (tmp[x].getElementsByClassName('inline-media')[0] !== undefined) {
@@ -205,7 +211,7 @@
         while (x < tmp.length) {
           tweets.push(getElementsByClassName(tmp[x], 'e-entry-title')[0]);
           tids.push(tmp[x].getAttribute('data-tweet-id'));
-          authors.push(getElementsByClassName(tmp[x], 'p-author')[0]);
+          authors.push(swapDataSrc(getElementsByClassName(tmp[x], 'p-author')[0]));
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
           permalinksURL.push(getElementsByClassName(tmp[x], 'permalink')[0]);
           if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
