@@ -1,5 +1,5 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v13.0 ####
+*  #### Twitter Post Fetcher v14.0 ####
 *  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
@@ -86,7 +86,8 @@
 
   function extractImageUrl(image_data) {
     if (image_data !== undefined) {
-      var data_src = image_data.innerHTML.match(/data-srcset="([A-z0-9%_\.-]+)/i)[0];
+      var data_src = image_data.innerHTML
+          .match(/data-srcset="([A-z0-9%_\.-]+)/i)[0];
       return decodeURIComponent(data_src).split('"')[1];
     }
   }
@@ -195,10 +196,12 @@
           if (!rts[x] || rts[x] && showRts) {
             tweets.push(tmp[x].getElementsByClassName('e-entry-title')[0]);
             tids.push(tmp[x].getAttribute('data-tweet-id'));
-            authors.push(swapDataSrc(tmp[x].getElementsByClassName('p-author')[0]));
+            authors.push(swapDataSrc(tmp[x]
+                .getElementsByClassName('p-author')[0]));
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
             permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
-            if (tmp[x].getElementsByClassName('inline-media')[0] !== undefined) {
+            if (tmp[x].getElementsByClassName('inline-media')[0] !==
+                undefined) {
               images.push(tmp[x].getElementsByClassName('inline-media')[0]);
             } else {
               images.push(undefined);
@@ -211,7 +214,8 @@
         while (x < tmp.length) {
           tweets.push(getElementsByClassName(tmp[x], 'e-entry-title')[0]);
           tids.push(tmp[x].getAttribute('data-tweet-id'));
-          authors.push(swapDataSrc(getElementsByClassName(tmp[x], 'p-author')[0]));
+          authors.push(swapDataSrc(getElementsByClassName(tmp[x],
+              'p-author')[0]));
           times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
           permalinksURL.push(getElementsByClassName(tmp[x], 'permalink')[0]);
           if (getElementsByClassName(tmp[x], 'inline-media')[0] !== undefined) {
@@ -322,10 +326,11 @@
           }
           if (showInteractionLinks) {
             op += '<p class="interact"><a href="https://twitter.com/intent/' +
-                'tweet?in_reply_to=' + tids[n] + '" class="twitter_reply_icon"' +
+                'tweet?in_reply_to=' + tids[n] +
+                '" class="twitter_reply_icon"' +
                 (targetBlank ? ' target="_blank">' : '>') +
-                'Reply</a><a href="https://twitter.com/intent/retweet?tweet_id=' +
-                tids[n] + '" class="twitter_retweet_icon"' +
+                'Reply</a><a href="https://twitter.com/intent/retweet?' +
+                'tweet_id=' + tids[n] + '" class="twitter_retweet_icon"' +
                 (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
                 '<a href="https://twitter.com/intent/favorite?tweet_id=' +
                 tids[n] + '" class="twitter_fav_icon"' +
@@ -342,6 +347,7 @@
           n++;
         }
       }
+
       handleTweets(arrayTweets);
       inProgress = false;
 
@@ -354,6 +360,5 @@
 
   // It must be a global variable because it will be called by JSONP.
   window.twitterFetcher = twitterFetcher;
-
   return twitterFetcher;
 }));
