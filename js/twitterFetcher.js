@@ -171,7 +171,7 @@
 
       function swapDataSrc(element) {
         var avatarImg = element.getElementsByTagName('img')[0];
-        avatarImg.src = avatarImg.dataset['src-2x'];
+        avatarImg.src = avatarImg.getAttribute('data-src-2x');
         return element;
       };
 
