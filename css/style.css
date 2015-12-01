@@ -1,4 +1,4 @@
-/* 
+/*
 * Example style!
 * You can do whatever the hell you want on your site :-)
 */
@@ -101,4 +101,8 @@ ul li:hover {
   padding:5px;
   width:10%;
   font-family:arial;
+}
+
+.tco-hidden{
+  display: none;
 }

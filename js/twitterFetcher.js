@@ -61,7 +61,7 @@
 
   function strip(data) {
     return data.replace(/<b[^>]*>(.*?)<\/b>/gi, function(a,s){return s;})
-        .replace(/class=".*?"|data-query-source=".*?"|dir=".*?"|rel=".*?"/gi,
+        .replace(/class="(?!(tco-hidden|tco-display|tco-ellipsis))+.*?"|data-query-source=".*?"|dir=".*?"|rel=".*?"/gi,
         '');
   }
 
