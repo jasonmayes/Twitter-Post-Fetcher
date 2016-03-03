@@ -85,7 +85,7 @@
   }
 
   function extractImageUrl(image_data) {
-    if (image_data !== undefined) {
+    if (image_data !== undefined && image_data.innerHTML.indexOf('data-srcset') >= 0) {
       var data_src = image_data.innerHTML
           .match(/data-srcset="([A-z0-9%_\.-]+)/i)[0];
       return decodeURIComponent(data_src).split('"')[1];
@@ -255,7 +255,8 @@
             image: extractImageUrl(images[n]),
             rt: rts[n],
             tid: tids[n],
-            permalinkURL: permalinksURL[n].href
+            permalinkURL: (permalinksURL[n] === undefined) ?
+                '' : permalinksURL[n].href 
           });
           n++;
         }
@@ -363,3 +364,17 @@
   window.twitterFetcher = twitterFetcher;
   return twitterFetcher;
 }));
+
+
+
+var config8 = {
+  "id": '345170787868762112',
+  "dataOnly": true,
+  "customCallback": populateTpl
+};
+
+twitterFetcher.fetch(config8);
+
+function populateTpl(tweets){
+  console.log(tweets);
+}
