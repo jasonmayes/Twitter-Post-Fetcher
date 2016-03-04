@@ -199,7 +199,7 @@
             authors.push(swapDataSrc(tmp[x]
                 .getElementsByClassName('timeline-Tweet-author')[0]));
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
-            permalinksURL.push(tmp[x].getElementsByClassName('permalink')[0]);
+            permalinksURL.push(tmp[x].getElementsByClassName('timeline-Tweet-timestamp')[0]);
             if (tmp[x].getElementsByClassName('timeline-Tweet-media')[0] !==
                 undefined) {
               images.push(tmp[x].getElementsByClassName('timeline-Tweet-media')[0]);
@@ -223,7 +223,7 @@
             authors.push(swapDataSrc(getElementsByClassName(tmp[x],
                 'timeline-Tweet-author')[0]));
             times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
-            permalinksURL.push(getElementsByClassName(tmp[x], 'permalink')[0]);
+            permalinksURL.push(getElementsByClassName(tmp[x], 'timeline-Tweet-timestamp')[0]);
             if (getElementsByClassName(tmp[x], 'timeline-Tweet-media')[0] !== undefined) {
               images.push(getElementsByClassName(tmp[x], 'timeline-Tweet-media')[0]);
             } else {
