@@ -251,7 +251,7 @@
           arrayTweets.push({
             tweet: tweets[n].innerHTML,
             author: authors[n].innerHTML,
-            time: times[n].innerText,
+            time: times[n].textContent,
             image: extractImageUrl(images[n]),
             rt: rts[n],
             tid: tids[n],
@@ -269,10 +269,10 @@
             var dateString = formatterFunction(newDate, datetimeText);
             times[n].setAttribute('aria-label', dateString);
 
-            if (tweets[n].innerText) {
+            if (tweets[n].textContent) {
               // IE hack.
               if (supportsClassName) {
-                times[n].innerText = dateString;
+                times[n].textContent = dateString;
               } else {
                 var h = document.createElement('p');
                 var t = document.createTextNode(dateString);
@@ -307,13 +307,13 @@
               }
             }
           } else {
-            if (tweets[n].innerText) {
+            if (tweets[n].textContent) {
               if (printUser) {
-                op += '<p class="user">' + authors[n].innerText + '</p>';
+                op += '<p class="user">' + authors[n].textContent + '</p>';
               }
-              op += '<p class="tweet">' +  tweets[n].innerText + '</p>';
+              op += '<p class="tweet">' +  tweets[n].textContent + '</p>';
               if (printTime) {
-                op += '<p class="timePosted">' + times[n].innerText + '</p>';
+                op += '<p class="timePosted">' + times[n].textContent + '</p>';
               }
 
             } else {
