@@ -364,17 +364,3 @@
   window.twitterFetcher = twitterFetcher;
   return twitterFetcher;
 }));
-
-
-
-var config8 = {
-  "id": '345170787868762112',
-  "dataOnly": true,
-  "customCallback": populateTpl
-};
-
-twitterFetcher.fetch(config8);
-
-function populateTpl(tweets){
-  console.log(tweets);
-}
