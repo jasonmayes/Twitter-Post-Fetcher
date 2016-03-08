@@ -1,5 +1,5 @@
 {
-  "name": "twitterFetcher",
+  "name": "twitter-fetcher",
   "version": "15.0.1",
   "keywords": ["Twitter", "OAUTH", "JavaScript", "tweets", "api", "widget"],
   "author": "Jason Mayes",
