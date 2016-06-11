@@ -108,6 +108,18 @@ var config3 = {
 twitterFetcher.fetch(config3);
 
 
+var configList = {
+  "list": {"listSlug": 'inspiration', "screenName": 'jason_mayes'},
+  "domId": 'example2',
+  "maxTweets": 5,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configList);
+
 // ##### Advanced example #####
 // An advance example to get latest 5 posts using hashtag #API and write to a
 // HTML element with id "tweets2" without showing user details and using a
