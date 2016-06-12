@@ -110,7 +110,7 @@ twitterFetcher.fetch(config3);
 
 var configList = {
   "list": {"listSlug": 'inspiration', "screenName": 'jason_mayes'},
-  "domId": 'example2',
+  "domId": 'exampleList',
   "maxTweets": 5,
   "enableLinks": true, 
   "showUser": true,
