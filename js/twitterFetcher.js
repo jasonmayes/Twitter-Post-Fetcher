@@ -1,5 +1,5 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v16.0.0 ####
+*  #### Twitter Post Fetcher v16.0.1 ####
 *  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
@@ -156,20 +156,30 @@
         }
         script = document.createElement('script');
         script.type = 'text/javascript';
-        if (config.list === undefined) {
+        if (config.list !== undefined) {
+          script.src = 'https://syndication.twitter.com/timeline/list?' +
+              'callback=twitterFetcher.callback&dnt=false&list_slug=' +
+              config.list.listSlug + '&screen_name=' + config.list.screenName +
+              '&suppress_response_codes=true&lang=' + (config.lang || lang) +
+              '&rnd=' + Math.random();
+        } else if (config.profile !== undefined) {
+          script.src = 'https://syndication.twitter.com/timeline/profile?' +
+              'callback=twitterFetcher.callback&dnt=false' +
+              '&screen_name=' + config.profile.screenName +
+              '&suppress_response_codes=true&lang=' + (config.lang || lang) +
+              '&rnd=' + Math.random();
+        } else if (config.likes !== undefined) {
+          script.src = 'https://syndication.twitter.com/timeline/likes?' +
+              'callback=twitterFetcher.callback&dnt=false' +
+              '&screen_name=' + config.likes.screenName +
+              '&suppress_response_codes=true&lang=' + (config.lang || lang) +
+              '&rnd=' + Math.random();
+        } else {
           script.src = 'https://cdn.syndication.twimg.com/widgets/timelines/' +
               config.id + '?&lang=' + (config.lang || lang) +
               '&callback=twitterFetcher.callback&' +
               'suppress_response_codes=true&rnd=' + Math.random();
-        } else {
-        console.log(config.list.listSlug);
-        console.log(config.list.screenName);
-          script.src = 'https://syndication.twitter.com/timeline/list?' +
-              'callback=twitterFetcher.callback&dnt=false&lang=en&list_slug=' +
-              config.list.listSlug + '&screen_name=' + config.list.screenName +
-              '&suppress_response_codes=true&lang=' + (config.lang || lang) +
-              '&rnd=' + Math.random();
-        }
+        } 
         head.appendChild(script);
       }
     },

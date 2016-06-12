@@ -3,7 +3,9 @@ Twitter-Post-Fetcher
 
 Allows you to get your tweets displaying on your website using JavaScript, without using new Twitter 1.1 API 
 
-Further information and project page: http://jasonmayes.com/projects/twitterApi/ 
+Further information and project page: http://jasonmayes.com/projects/twitterApi/
+
+Latest version: 16.0.1 - ensure you are using the latest version to avoid issues!
 
 ## Why does this exist?
 

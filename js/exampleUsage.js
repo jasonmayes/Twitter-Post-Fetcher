@@ -120,6 +120,33 @@ var configList = {
 };
 twitterFetcher.fetch(configList);
 
+
+var configProfile = {
+  "profile": {"screenName": 'jason_mayes'},
+  "domId": 'exampleProfile',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configProfile);
+
+
+var configLikes = {
+  "profile": {"screenName": 'jason_mayes'},
+  "domId": 'exampleLikes',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configLikes);
+
+
 // ##### Advanced example #####
 // An advance example to get latest 5 posts using hashtag #API and write to a
 // HTML element with id "tweets2" without showing user details and using a
