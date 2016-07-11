@@ -1,5 +1,5 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v16.0.1 ####
+*  #### Twitter Post Fetcher v16.0.2 ####
 *  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
@@ -184,13 +184,13 @@
       }
     },
     callback: function(data) {
-      // remove emoji and summary card images
+      // Remove emoji and summary card images.
       data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
-      // remove display images
+      // Remove display images.
       if (!showImages) {
         data.body = data.body.replace(/(<img[^c]*class="NaturalImage-image[^>]*>|(<img[^c]*class="CroppedImage-image[^>]*>))/g, '');
       }
-      // remove avatar images
+      // Remove avatar images.
       if (!printUser) {
         data.body = data.body.replace(/(<img[^c]*class="Avatar"[^>]*>)/g, '');
       }
