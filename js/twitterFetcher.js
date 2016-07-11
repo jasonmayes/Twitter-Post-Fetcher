@@ -179,11 +179,22 @@
               config.id + '?&lang=' + (config.lang || lang) +
               '&callback=twitterFetcher.callback&' +
               'suppress_response_codes=true&rnd=' + Math.random();
-        } 
+        }
         head.appendChild(script);
       }
     },
     callback: function(data) {
+      // remove emoji and summary card images
+      data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
+      // remove display images
+      if (!showImages) {
+        data.body = data.body.replace(/(<img[^c]*class="NaturalImage-image[^>]*>|(<img[^c]*class="CroppedImage-image[^>]*>))/g, '');
+      }
+      // remove avatar images
+      if (!printUser) {
+        data.body = data.body.replace(/(<img[^c]*class="Avatar"[^>]*>)/g, '');
+      }
+
       var div = document.createElement('div');
       div.innerHTML = data.body;
       if (typeof(div.getElementsByClassName) === 'undefined') {
@@ -194,7 +205,7 @@
         var avatarImg = element.getElementsByTagName('img')[0];
         avatarImg.src = avatarImg.getAttribute('data-src-2x');
         return element;
-      };
+      }
 
       var tweets = [];
       var authors = [];
@@ -216,8 +227,9 @@
           if (!rts[x] || rts[x] && showRts) {
             tweets.push(tmp[x].getElementsByClassName('timeline-Tweet-text')[0]);
             tids.push(tmp[x].getAttribute('data-tweet-id'));
-            authors.push(swapDataSrc(tmp[x]
-                .getElementsByClassName('timeline-Tweet-author')[0]));
+            if (printUser) {
+              authors.push(swapDataSrc(tmp[x].getElementsByClassName('timeline-Tweet-author')[0]));
+            }
             times.push(tmp[x].getElementsByClassName('dt-updated')[0]);
             permalinksURL.push(tmp[x].getElementsByClassName('timeline-Tweet-timestamp')[0]);
             if (tmp[x].getElementsByClassName('timeline-Tweet-media')[0] !==
@@ -240,8 +252,9 @@
           if (!rts[x] || rts[x] && showRts) {
             tweets.push(getElementsByClassName(tmp[x], 'timeline-Tweet-text')[0]);
             tids.push(tmp[x].getAttribute('data-tweet-id'));
-            authors.push(swapDataSrc(getElementsByClassName(tmp[x],
-                'timeline-Tweet-author')[0]));
+            if (printUser) {
+              authors.push(swapDataSrc(getElementsByClassName(tmp[x],'timeline-Tweet-author')[0]));
+            }
             times.push(getElementsByClassName(tmp[x], 'dt-updated')[0]);
             permalinksURL.push(getElementsByClassName(tmp[x], 'timeline-Tweet-timestamp')[0]);
             if (getElementsByClassName(tmp[x], 'timeline-Tweet-media')[0] !== undefined) {
@@ -276,7 +289,7 @@
             rt: rts[n],
             tid: tids[n],
             permalinkURL: (permalinksURL[n] === undefined) ?
-                '' : permalinksURL[n].href 
+                '' : permalinksURL[n].href
           });
           n++;
         }
@@ -358,14 +371,17 @@
                 tids[n] + '" class="twitter_fav_icon"' +
                 (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
           }
-
-          if (showImages && images[n] !== undefined) {
+          if (showImages && images[n] !== undefined && extractImageUrl(images[n]) !== undefined) {
             op += '<div class="media">' +
                 '<img src="' + extractImageUrl(images[n]) +
                 '" alt="Image from tweet" />' + '</div>';
           }
+          if (showImages) {
+            arrayTweets.push(op);
+          } else if (!showImages && tweets[n].textContent.length) {
+            arrayTweets.push(op);
+          }
 
-          arrayTweets.push(op);
           n++;
         }
       }
