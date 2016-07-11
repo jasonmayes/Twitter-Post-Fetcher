@@ -184,9 +184,6 @@
       }
     },
     callback: function(data) {
-      // data.body is the pre-parsed HTML that can be searched for img elements to remove
-      // console.log(data.body);
-
       // remove emoji and summary card images
       data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
       // remove display images
@@ -374,16 +371,13 @@
                 tids[n] + '" class="twitter_fav_icon"' +
                 (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
           }
-          // prevent images with undefined source from being displayed
           if (showImages && images[n] !== undefined && extractImageUrl(images[n]) !== undefined) {
             op += '<div class="media">' +
                 '<img src="' + extractImageUrl(images[n]) +
                 '" alt="Image from tweet" />' + '</div>';
           }
-          // if images are displayed, add the tweet
           if (showImages) {
             arrayTweets.push(op);
-          // if images are not displayed and there is tweet text, add the tweet
           } else if (!showImages && tweets[n].textContent.length) {
             arrayTweets.push(op);
           }
