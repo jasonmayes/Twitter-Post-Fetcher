@@ -1,17 +1,4 @@
 /**
- * ### HOW TO CREATE A VALID ID TO USE: ###
- * Go to www.twitter.com and sign in as normal, go to your settings page.
- * Go to "Widgets" on the left hand side.
- * Create a new widget for what you need eg "user time line" or "search" etc.
- * Feel free to check "exclude replies" if you don't want replies in results.
- * Now go back to settings page, and then go back to widgets page and
- * you should see the widget you just created. Click edit.
- * Look at the URL in your web browser, you will see a long number like this:
- * 345735908357048478
- * Use this as your ID below instead!
- */
-
-/**
  * How to use TwitterFetcher's fetch function:
  *
  * @function fetch(object) Fetches the Twitter content according to
@@ -20,7 +7,7 @@
  * @param object {Object} An object containing case sensitive key-value pairs
  *     of properties below.
  *
- * You may specify at minimum the following two required properties:
+ * You may specify at minimum the following required properties:
  *
  * @param object.id {string} DEPRECATED due to Twitter Change. Only use if
  *     you have an ID from prior to change. The ID of the Twitter widget you
@@ -28,6 +15,22 @@
  * @param object.domId {string} The ID of the DOM element you want
  *     to write results to.
  *
+ * Along with at least one of these:
+ * 
+ * 
+ * @param object.profile {Object} An object containing a refernece to the
+ *     screen name we wish to grab tweets for. Should be like this:
+ *     {"screenName": 'jason_mayes'}
+ * 
+ * @param object.likes {Object} An object containing a refernece to the
+ *     screen name we wish to grab likes for. Should be like this:
+ *     {"screenName": 'jason_mayes'}
+ * 
+ * @param object.list {Object} An object containing a refernece to the
+ *     screen name we wish to grab likes for. Should be like this:
+ *     {"listSlug": 'inspiration', "screenName": 'jason_mayes'}
+ *
+ * 
  * You may also specify one or more of the following optional properties
  *     if you desire:
  *
@@ -96,7 +99,7 @@ twitterFetcher.fetch(configProfile);
 
 
 var configLikes = {
-  "profile": {"screenName": 'jason_mayes'},
+  "likes": {"screenName": 'jason_mayes'},
   "domId": 'exampleLikes',
   "maxTweets": 3,
   "enableLinks": true, 
