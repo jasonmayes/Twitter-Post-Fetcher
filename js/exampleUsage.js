@@ -22,8 +22,9 @@
  *
  * You may specify at minimum the following two required properties:
  *
- * @param object.id {string} The ID of the Twitter widget you wish
- *     to grab data from (see above for how to generate this number).
+ * @param object.id {string} DEPRECATED due to Twitter Change. Only use if
+ *     you have an ID from prior to change. The ID of the Twitter widget you
+ *     wish to grab data from (see above for how to generate this number).
  * @param object.domId {string} The ID of the DOM element you want
  *     to write results to.
  *
@@ -63,6 +64,53 @@
  *     to the customCallback to be an Array of Objects containing data
  *     instead of an Array of HTML Strings
  */
+
+
+/**************************************************************************
+ * NEW: These first examples no longer need the Widget ID to work.
+ *************************************************************************/
+var configList = {
+  "list": {"listSlug": 'inspiration', "screenName": 'jason_mayes'},
+  "domId": 'exampleList',
+  "maxTweets": 5,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configList);
+
+
+var configProfile = {
+  "profile": {"screenName": 'jason_mayes'},
+  "domId": 'exampleProfile',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configProfile);
+
+
+var configLikes = {
+  "profile": {"screenName": 'jason_mayes'},
+  "domId": 'exampleLikes',
+  "maxTweets": 3,
+  "enableLinks": true, 
+  "showUser": true,
+  "showTime": true,
+  "showImages": true,
+  "lang": 'en'
+};
+twitterFetcher.fetch(configLikes);
+
+
+/**************************************************************************
+ * NOTE: Only use the below examples if you still have a widget ID to use.
+ *************************************************************************/
 
 // ##### Simple example 1 #####
 // A simple example to get my latest tweet and write to a HTML element with
@@ -106,45 +154,6 @@ var config3 = {
   "showImages": true
 };
 twitterFetcher.fetch(config3);
-
-
-var configList = {
-  "list": {"listSlug": 'inspiration', "screenName": 'jason_mayes'},
-  "domId": 'exampleList',
-  "maxTweets": 5,
-  "enableLinks": true, 
-  "showUser": true,
-  "showTime": true,
-  "showImages": true,
-  "lang": 'en'
-};
-twitterFetcher.fetch(configList);
-
-
-var configProfile = {
-  "profile": {"screenName": 'jason_mayes'},
-  "domId": 'exampleProfile',
-  "maxTweets": 3,
-  "enableLinks": true, 
-  "showUser": true,
-  "showTime": true,
-  "showImages": true,
-  "lang": 'en'
-};
-twitterFetcher.fetch(configProfile);
-
-
-var configLikes = {
-  "profile": {"screenName": 'jason_mayes'},
-  "domId": 'exampleLikes',
-  "maxTweets": 3,
-  "enableLinks": true, 
-  "showUser": true,
-  "showTime": true,
-  "showImages": true,
-  "lang": 'en'
-};
-twitterFetcher.fetch(configLikes);
 
 
 // ##### Advanced example #####
