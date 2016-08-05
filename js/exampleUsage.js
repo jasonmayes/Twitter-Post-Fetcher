@@ -15,8 +15,8 @@
  * @param object.domId {string} The ID of the DOM element you want
  *     to write results to.
  *
- * Along with at least one of these:
  * 
+ * Along with at least one of these:
  * 
  * @param object.profile {Object} An object containing a refernece to the
  *     screen name we wish to grab tweets for. Should be like this:
