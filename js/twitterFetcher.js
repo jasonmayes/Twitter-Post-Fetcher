@@ -285,6 +285,7 @@
             tweet: tweets[n].innerHTML,
             author: authors[n].innerHTML,
             time: times[n].textContent,
+            timestamp: times[n].getAttribute('datetime').replace('+0000', 'Z').replace(/([\+\-])(\d\d)(\d\d)/, '$1$2:$3'),
             image: extractImageUrl(images[n]),
             rt: rts[n],
             tid: tids[n],
