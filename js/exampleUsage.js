@@ -27,7 +27,7 @@
  *     {"screenName": 'jason_mayes'}
  * 
  * @param object.list {Object} An object containing a refernece to the
- *     screen name we wish to grab likes for. Should be like this:
+ *     screen name we wish to grab list for. Should be like this:
  *     {"listSlug": 'inspiration', "screenName": 'jason_mayes'}
  *
  * 
