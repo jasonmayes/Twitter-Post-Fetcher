@@ -185,6 +185,12 @@
     },
     callback: function(data) {
       if (data === undefined || data.body === undefined) {
+        inProgress = false;
+
+        if (queue.length > 0) {
+          twitterFetcher.fetch(queue[0]);
+          queue.splice(0,1);
+        }
         return;
       }
 
