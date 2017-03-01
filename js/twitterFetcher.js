@@ -184,10 +184,10 @@
       }
     },
     callback: function(data) {
-      if (data.body === undefined) {
+      if (data === undefined || data.body === undefined) {
         return;
-      } 
-      
+      }
+
       // Remove emoji and summary card images.
       data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
       // Remove display images.
