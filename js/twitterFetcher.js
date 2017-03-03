@@ -184,10 +184,16 @@
       }
     },
     callback: function(data) {
-      if (data.body === undefined) {
+      if (data === undefined || data.body === undefined) {
+        inProgress = false;
+
+        if (queue.length > 0) {
+          twitterFetcher.fetch(queue[0]);
+          queue.splice(0,1);
+        }
         return;
-      } 
-      
+      }
+
       // Remove emoji and summary card images.
       data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
       // Remove display images.
