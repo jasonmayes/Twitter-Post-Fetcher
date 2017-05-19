@@ -1,6 +1,6 @@
 {
   "name": "twitter-fetcher",
-  "version": "16.0.3",
+  "version": "17.0.0",
   "keywords": ["Twitter", "OAUTH", "JavaScript", "tweets", "api", "widget"],
   "description": "Fetch your twitter posts without using the new Twitter 1.1 API. Pure JavaScript!",
   "author": "Jason Mayes",
