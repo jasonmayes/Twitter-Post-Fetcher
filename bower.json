@@ -1,7 +1,7 @@
 {
   "name": "twitter-fetcher",
   "description": "Fetch your Twitter pots without using OAUTH or the new 1.1 API. All in JavaScript.",
-  "version": "16.0.3",
+  "version": "17.0.0",
   "author": {
     "name": "Jason Mayes"
   },
