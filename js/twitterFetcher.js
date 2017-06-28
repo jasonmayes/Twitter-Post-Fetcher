@@ -1,5 +1,5 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v17.0.0 ####
+*  #### Twitter Post Fetcher v17.0.1 ####
 *  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
