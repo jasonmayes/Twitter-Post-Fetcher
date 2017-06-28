@@ -35,6 +35,7 @@
   var customCallbackFunction = null;
   var showInteractionLinks = true;
   var showImages = false;
+  var useEmoji = false;
   var targetBlank = true;
   var lang = 'en';
   var permalinks = true;
@@ -121,6 +122,9 @@
       if (config.showImages === undefined) {
         config.showImages = false;
       }
+      if (config.useEmoji === undefined) {
+        config.useEmoji = false;
+      }
       if (config.linksInNewWindow === undefined) {
         config.linksInNewWindow = true;
       }
@@ -146,6 +150,7 @@
         customCallbackFunction = config.customCallback;
         showInteractionLinks = config.showInteraction;
         showImages = config.showImages;
+	useEmoji = config.useEmoji;
         targetBlank = config.linksInNewWindow;
         permalinks = config.showPermalinks;
         dataOnly = config.dataOnly;
@@ -195,7 +200,10 @@
       }
 
       // Remove emoji and summary card images.
-      data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
+      if(!useEmoji){
+        data.body = data.body.replace(/(<img[^c]*class="Emoji[^>]*>)|(<img[^c]*class="u-block[^>]*>)/g, '');
+      }
+
       // Remove display images.
       if (!showImages) {
         data.body = data.body.replace(/(<img[^c]*class="NaturalImage-image[^>]*>|(<img[^c]*class="CroppedImage-image[^>]*>))/g, '');
@@ -412,3 +420,4 @@
   window.twitterFetcher = twitterFetcher;
   return twitterFetcher;
 }));
+
