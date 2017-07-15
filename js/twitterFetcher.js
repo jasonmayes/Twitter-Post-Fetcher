@@ -304,6 +304,7 @@
             author: authors[n] ? authors[n].innerHTML : 'Unknown Author',
             author_data: {
               profile_url: authors[n].querySelector('[data-scribe="element:user_link"]').href,
+              profile_image: authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x'),
               screen_name: authors[n].querySelector('[data-scribe="element:screen_name"]').title,
               name: authors[n].querySelector('[data-scribe="element:name"]').title
             },
