@@ -303,11 +303,11 @@
             tweet: tweets[n].innerHTML,
             author: authors[n] ? authors[n].innerHTML : 'Unknown Author',
             author_data: {
-              profile_url: authors[n].querySelector('[data-scribe="element:user_link"]').href,
-              profile_image: authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-1x'),
-              profile_image_2x: authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x'),
-              screen_name: authors[n].querySelector('[data-scribe="element:screen_name"]').title,
-              name: authors[n].querySelector('[data-scribe="element:name"]').title
+              profile_url: authors[n] ? authors[n].querySelector('[data-scribe="element:user_link"]').href : nil,
+              profile_image: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-1x') : nil,
+              profile_image_2x: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x') : nil,
+              screen_name: authors[n] ? authors[n].querySelector('[data-scribe="element:screen_name"]').title : nil,
+              name: authors[n] ? authors[n].querySelector('[data-scribe="element:name"]').title : nil
             },
             time: times[n].textContent,
             timestamp: times[n].getAttribute('datetime').replace('+0000', 'Z').replace(/([\+\-])(\d\d)(\d\d)/, '$1$2:$3'),
