@@ -302,6 +302,13 @@
           arrayTweets.push({
             tweet: tweets[n].innerHTML,
             author: authors[n] ? authors[n].innerHTML : 'Unknown Author',
+            author_data: {
+              profile_url: authors[n] ? authors[n].querySelector('[data-scribe="element:user_link"]').href : null,
+              profile_image: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-1x') : null,
+              profile_image_2x: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x') : null,
+              screen_name: authors[n] ? authors[n].querySelector('[data-scribe="element:screen_name"]').title : null,
+              name: authors[n] ? authors[n].querySelector('[data-scribe="element:name"]').title : null
+            },
             time: times[n].textContent,
             timestamp: times[n].getAttribute('datetime').replace('+0000', 'Z').replace(/([\+\-])(\d\d)(\d\d)/, '$1$2:$3'),
             image: extractImageUrl(images[n]),
