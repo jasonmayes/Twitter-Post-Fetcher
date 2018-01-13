@@ -86,12 +86,12 @@
   }
 
   function extractImageUrl(image_data) {
-    if (image_data !== undefined && image_data.innerHTML.indexOf('data-srcset') >= 0) {
-      var data_src = image_data.innerHTML
-          .match(/data-srcset="([A-z0-9%_\.-]+)/i)[0];
-      return decodeURIComponent(data_src).split('"')[1];
+    if (image_data !== undefined && image_data.innerHTML.indexOf('data-image') >= 0) {
+      var data_src = image_data.innerHTML.match(/data-image=\"([A-z0-9]+:\/\/[A-z0-9]+\.[A-z0-9]+\.[A-z0-9]+\/[A-z0-9]+\/[A-z0-9\-]+)/i)[1];
+      return decodeURIComponent(data_src) + '.jpg';
     }
   }
+ 
 
   var twitterFetcher = {
     fetch: function(config) {
