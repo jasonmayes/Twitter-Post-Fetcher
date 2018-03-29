@@ -70,6 +70,7 @@
     var links = el.getElementsByTagName('a');
     for (var i = links.length - 1; i >= 0; i--) {
       links[i].setAttribute('target', '_blank');
+      links[i].setAttribute('rel', 'noopener');
     }
   }
 
@@ -389,13 +390,13 @@
             op += '<p class="interact"><a href="https://twitter.com/intent/' +
                 'tweet?in_reply_to=' + tids[n] +
                 '" class="twitter_reply_icon"' +
-                (targetBlank ? ' target="_blank">' : '>') +
+                (targetBlank ? ' target="_blank" rel="noopener">' : '>') +
                 'Reply</a><a href="https://twitter.com/intent/retweet?' +
                 'tweet_id=' + tids[n] + '" class="twitter_retweet_icon"' +
-                (targetBlank ? ' target="_blank">' : '>') + 'Retweet</a>' +
+                (targetBlank ? ' target="_blank" rel="noopener">' : '>') + 'Retweet</a>' +
                 '<a href="https://twitter.com/intent/favorite?tweet_id=' +
                 tids[n] + '" class="twitter_fav_icon"' +
-                (targetBlank ? ' target="_blank">' : '>') + 'Favorite</a></p>';
+                (targetBlank ? ' target="_blank" rel="noopener">' : '>') + 'Favorite</a></p>';
           }
           if (showImages && images[n] !== undefined && extractImageUrl(images[n]) !== undefined) {
             op += '<div class="media">' +
