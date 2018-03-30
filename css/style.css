@@ -71,6 +71,10 @@ ul li:hover {
   float:left;
 }
 
+.user div {
+ clear: left; 
+}
+
 .interact {
   float:left;
   width:10%;

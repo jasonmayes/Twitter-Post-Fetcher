@@ -1,5 +1,5 @@
 /*********************************************************************
-*  #### Twitter Post Fetcher v17.0.3 ####
+*  #### Twitter Post Fetcher v18.0.0 ####
 *  Coded by Jason Mayes 2015. A present to all the developers out there.
 *  www.jasonmayes.com
 *  Please keep this disclaimer with my code if you use it. Thanks. :-)
@@ -222,7 +222,16 @@
 
       function swapDataSrc(element) {
         var avatarImg = element.getElementsByTagName('img')[0];
-        avatarImg.src = avatarImg.getAttribute('data-src-2x');
+        if (avatarImg) {
+          avatarImg.src = avatarImg.getAttribute('data-src-2x');
+        } else {
+          var screenName = element.getElementsByTagName('a')[0]
+              .getAttribute('href').split('twitter.com/')[1];
+          var img = document.createElement('img');
+          img.setAttribute('src', 'https://twitter.com/' + screenName + 
+              '/profile_image?size=bigger');
+          element.prepend(img);
+        }
         return element;
       }
 
@@ -305,8 +314,8 @@
             author: authors[n] ? authors[n].innerHTML : 'Unknown Author',
             author_data: {
               profile_url: authors[n] ? authors[n].querySelector('[data-scribe="element:user_link"]').href : null,
-              profile_image: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-1x') : null,
-              profile_image_2x: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x') : null,
+              profile_image: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-1x') : authors[n] ? 'https://twitter.com/' + authors[n].innerText + '/profile_image?size=bigger' : null,
+              profile_image_2x: authors[n] ? authors[n].querySelector('[data-scribe="element:avatar"]').getAttribute('data-src-2x') : authors[n] ? 'https://twitter.com/' + authors[n].innerText + '/profile_image?size=original' : null,
               screen_name: authors[n] ? authors[n].querySelector('[data-scribe="element:screen_name"]').title : null,
               name: authors[n] ? authors[n].querySelector('[data-scribe="element:name"]').title : null
             },
