@@ -5,7 +5,7 @@ Allows you to get your tweets displaying on your website using JavaScript, witho
 
 Further information and project page: http://jasonmayes.com/projects/twitterApi/
 
-Latest version: 18.0.1 - ensure you are using the latest version to avoid issues!
+Latest version: 18.0.2 - ensure you are using the latest version to avoid issues!
 
 ## Why does this exist?
 
