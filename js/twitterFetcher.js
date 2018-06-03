@@ -86,10 +86,14 @@
     return a;
   }
 
-  function extractImageUrl(image_data) {
+  function extractImagesUrl(image_data) {
     if (image_data !== undefined && image_data.innerHTML.indexOf('data-image') >= 0) {
-      var data_src = image_data.innerHTML.match(/data-image=\"([A-z0-9]+:\/\/[A-z0-9]+\.[A-z0-9]+\.[A-z0-9]+\/[A-z0-9]+\/[A-z0-9\-]+)/i)[1];
-      return decodeURIComponent(data_src) + '.jpg';
+      var data_src = image_data.innerHTML.match(/data-image=\"([A-z0-9]+:\/\/[A-z0-9]+\.[A-z0-9]+\.[A-z0-9]+\/[A-z0-9]+\/[A-z0-9\-]+)\"/ig);
+      for (var i = 0; i < data_src.length; i++) {
+        data_src[i] = data_src[i].match(/data-image=\"([A-z0-9]+:\/\/[A-z0-9]+\.[A-z0-9]+\.[A-z0-9]+\/[A-z0-9]+\/[A-z0-9\-]+)\"/i)[1];
+        data_src[i] = decodeURIComponent(data_src[i]) + '.jpg';
+      }
+      return data_src;
     }
   }
  
@@ -322,7 +326,8 @@
             },
             time: times[n].textContent,
             timestamp: times[n].getAttribute('datetime').replace('+0000', 'Z').replace(/([\+\-])(\d\d)(\d\d)/, '$1$2:$3'),
-            image: extractImageUrl(images[n]),
+            image: (extractImagesUrl(images[n]) ? extractImagesUrl(images[n])[0] : undefined),
+            images: extractImagesUrl(images[n]),
             rt: rts[n],
             tid: tids[n],
             permalinkURL: (permalinksURL[n] === undefined) ?
@@ -408,10 +413,13 @@
                 tids[n] + '" class="twitter_fav_icon"' +
                 (targetBlank ? ' target="_blank" rel="noopener">' : '>') + 'Favorite</a></p>';
           }
-          if (showImages && images[n] !== undefined && extractImageUrl(images[n]) !== undefined) {
-            op += '<div class="media">' +
-                '<img src="' + extractImageUrl(images[n]) +
-                '" alt="Image from tweet" />' + '</div>';
+          if (showImages && images[n] !== undefined && extractImagesUrl(images[n]) !== undefined) {
+            var extractedImages = extractImagesUrl(images[n]);
+            for (var i = 0; i < extractedImages.length; i++) {
+              op += '<div class="media">' +
+                    '<img src="' + extractedImages[i] +
+                    '" alt="Image from tweet" />' + '</div>';
+            }
           }
           if (showImages) {
             arrayTweets.push(op);
