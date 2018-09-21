@@ -9,8 +9,7 @@
  *
  * You may specify at minimum the following required properties:
  *
- * @param object.id {string} DEPRECATED due to Twitter Change. Only use if
- *     you have an ID from prior to change. The ID of the Twitter widget you
+ * @param object.id {string} DEPRECATED due to Twitter Change. DO NOT USE THIS ANY MORE. The ID of the Twitter widget you
  *     wish to grab data from (see above for how to generate this number).
  * @param object.domId {string} The ID of the DOM element you want
  *     to write results to.
@@ -112,7 +111,8 @@ twitterFetcher.fetch(configLikes);
 
 
 /**************************************************************************
- * NOTE: Only use the below examples if you still have a widget ID to use.
+ * NOTE: DO NOT USE THE BELOW! These are here just for historical reasons 
+ * now. Widget IDs no longer work/supported.
  *************************************************************************/
 
 // ##### Simple example 1 #####
