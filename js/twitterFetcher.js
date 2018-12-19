@@ -184,6 +184,12 @@
               '&screen_name=' + config.likes.screenName +
               '&suppress_response_codes=true&lang=' + (config.lang || lang) +
               '&rnd=' + Math.random();
+        } else if (config.collection !== undefined) {
+          script.src = 'https://syndication.twitter.com/timeline/collection?' +
+              'callback=__twttrf.callback&dnt=false' +
+              '&collection_id=' + config.collection.collectionId +
+              '&suppress_response_codes=true&lang=' + (config.lang || lang) +
+              '&rnd=' + Math.random();
         } else {
           script.src = 'https://cdn.syndication.twimg.com/widgets/timelines/' +
               config.id + '?&lang=' + (config.lang || lang) +
